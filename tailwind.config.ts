@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        mono: ['JetBrains Mono', 'Courier New', 'monospace'],
+        terminal: ['JetBrains Mono', 'Courier New', 'monospace'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -47,15 +51,18 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        terminal: {
+          bg: "hsl(var(--terminal-bg))",
+          surface: "hsl(var(--terminal-surface))",
+          green: "hsl(var(--terminal-green))",
+          'green-glow': "hsl(var(--terminal-green-glow))",
+          amber: "hsl(var(--terminal-amber))",
+          'amber-glow': "hsl(var(--terminal-amber-glow))",
+          red: "hsl(var(--terminal-red))",
+          cyan: "hsl(var(--terminal-cyan))",
+          white: "hsl(var(--terminal-white))",
+          gray: "hsl(var(--terminal-gray))",
+          'dark-green': "hsl(var(--terminal-dark-green))",
         },
       },
       borderRadius: {
