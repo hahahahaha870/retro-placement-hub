@@ -2,49 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Retro Terminal Design System */
+/* Classic Windows 95/98 Design System */
 @layer base {
   :root {
-    /* Terminal Color Palette */
-    --terminal-bg: 0 0% 8%;
-    --terminal-surface: 0 0% 12%;
-    --terminal-green: 120 100% 50%;
-    --terminal-green-glow: 120 100% 40%;
-    --terminal-amber: 45 100% 50%;
-    --terminal-amber-glow: 45 100% 40%;
-    --terminal-red: 0 100% 50%;
-    --terminal-cyan: 180 100% 50%;
-    --terminal-white: 0 0% 90%;
-    --terminal-gray: 0 0% 60%;
-    --terminal-dark-green: 120 100% 25%;
+    /* Windows 95 Color Palette */
+    --win95-gray: 0 0% 75%;
+    --win95-light-gray: 0 0% 88%;
+    --win95-dark-gray: 0 0% 50%;
+    --win95-darker-gray: 0 0% 25%;
+    --win95-white: 0 0% 100%;
+    --win95-black: 0 0% 0%;
+    --win95-blue: 214 100% 50%;
+    --win95-navy: 214 100% 25%;
+    --win95-red: 0 100% 50%;
+    --win95-yellow: 60 100% 75%;
+    --win95-teal: 180 100% 40%;
     
     /* Theme Mappings */
-    --background: var(--terminal-bg);
-    --foreground: var(--terminal-green);
-    --card: var(--terminal-surface);
-    --card-foreground: var(--terminal-green);
-    --popover: var(--terminal-surface);
-    --popover-foreground: var(--terminal-green);
-    --primary: var(--terminal-green);
-    --primary-foreground: var(--terminal-bg);
-    --secondary: var(--terminal-surface);
-    --secondary-foreground: var(--terminal-green);
-    --muted: var(--terminal-surface);
-    --muted-foreground: var(--terminal-gray);
-    --accent: var(--terminal-amber);
-    --accent-foreground: var(--terminal-bg);
-    --destructive: var(--terminal-red);
-    --destructive-foreground: var(--terminal-white);
-    --border: var(--terminal-dark-green);
-    --input: var(--terminal-surface);
-    --ring: var(--terminal-green);
+    --background: var(--win95-gray);
+    --foreground: var(--win95-black);
+    --card: var(--win95-light-gray);
+    --card-foreground: var(--win95-black);
+    --popover: var(--win95-light-gray);
+    --popover-foreground: var(--win95-black);
+    --primary: var(--win95-blue);
+    --primary-foreground: var(--win95-white);
+    --secondary: var(--win95-gray);
+    --secondary-foreground: var(--win95-black);
+    --muted: var(--win95-light-gray);
+    --muted-foreground: var(--win95-dark-gray);
+    --accent: var(--win95-teal);
+    --accent-foreground: var(--win95-white);
+    --destructive: var(--win95-red);
+    --destructive-foreground: var(--win95-white);
+    --border: var(--win95-dark-gray);
+    --input: var(--win95-white);
+    --ring: var(--win95-blue);
     --radius: 0rem;
 
-    /* Terminal Effects */
-    --scanline-opacity: 0.05;
-    --glow-size: 2px;
-    --text-shadow: 0 0 8px hsl(var(--terminal-green-glow));
-    --terminal-border: 2px solid hsl(var(--terminal-green));
+    /* Windows Effects */
+    --win95-border-raised: inset -1px -1px hsl(var(--win95-dark-gray)), inset 1px 1px hsl(var(--win95-white));
+    --win95-border-sunken: inset 1px 1px hsl(var(--win95-dark-gray)), inset -1px -1px hsl(var(--win95-white));
+    --win95-title-gradient: linear-gradient(90deg, hsl(var(--win95-blue)), hsl(var(--win95-navy)));
   }
 
   .dark {
@@ -58,82 +57,117 @@
   }
 
   body {
-    @apply bg-background text-foreground font-mono;
-    font-family: 'JetBrains Mono', monospace;
+    @apply bg-background text-foreground;
+    font-family: 'MS Sans Serif', sans-serif;
+    background: hsl(var(--win95-gray));
+  }
+
+  /* Windows 95 Panel Styles */
+  .win95-panel {
+    background: hsl(var(--win95-gray));
+    border: 2px outset hsl(var(--win95-gray));
+    box-shadow: var(--win95-border-raised);
+  }
+
+  .win95-panel-inset {
+    background: hsl(var(--win95-light-gray));
+    border: 2px inset hsl(var(--win95-gray));
+    box-shadow: var(--win95-border-sunken);
+  }
+
+  /* Windows 95 Button Styles */
+  .win95-button {
+    background: hsl(var(--win95-gray));
+    border: 2px outset hsl(var(--win95-gray));
+    color: hsl(var(--win95-black));
+    padding: 4px 16px;
+    font-family: 'MS Sans Serif', sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    min-height: 23px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .win95-button:hover {
+    background: hsl(var(--win95-light-gray));
+  }
+
+  .win95-button:active {
+    border: 2px inset hsl(var(--win95-gray));
+    background: hsl(var(--win95-dark-gray) / 0.1);
+  }
+
+  .win95-button:disabled {
+    color: hsl(var(--win95-dark-gray));
+    background: hsl(var(--win95-gray));
+  }
+
+  /* Windows 95 Title Bar */
+  .win95-titlebar {
+    background: var(--win95-title-gradient);
+    color: hsl(var(--win95-white));
+    padding: 2px 4px;
+    font-weight: bold;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .win95-window {
+    background: hsl(var(--win95-gray));
+    border: 2px outset hsl(var(--win95-gray));
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Windows 95 Input Fields */
+  .win95-input {
+    background: hsl(var(--win95-white));
+    border: 2px inset hsl(var(--win95-gray));
+    padding: 2px 4px;
+    font-family: 'MS Sans Serif', sans-serif;
+    font-size: 11px;
+  }
+
+  .win95-input:focus {
+    outline: 1px dotted hsl(var(--win95-black));
+    outline-offset: -3px;
+  }
+
+  /* Windows 95 Menu Bar */
+  .win95-menubar {
+    background: hsl(var(--win95-gray));
+    border-bottom: 1px solid hsl(var(--win95-dark-gray));
+    padding: 4px;
+  }
+
+  /* Windows 95 Status Bar */
+  .win95-statusbar {
+    background: hsl(var(--win95-gray));
+    border-top: 1px solid hsl(var(--win95-dark-gray));
+    padding: 2px 4px;
+    font-size: 11px;
+    border: 1px inset hsl(var(--win95-gray));
+  }
+
+  /* Windows 95 List View */
+  .win95-listview {
+    background: hsl(var(--win95-white));
+    border: 2px inset hsl(var(--win95-gray));
+  }
+
+  /* Windows 95 Desktop Pattern */
+  .win95-desktop {
+    background: hsl(var(--win95-teal));
     background-image: 
       repeating-linear-gradient(
-        0deg,
+        45deg,
         transparent,
         transparent 2px,
-        rgba(0, 255, 65, var(--scanline-opacity)) 2px,
-        rgba(0, 255, 65, var(--scanline-opacity)) 4px
+        rgba(255, 255, 255, 0.1) 2px,
+        rgba(255, 255, 255, 0.1) 4px
       );
-  }
-
-  /* Terminal Text Effects */
-  .terminal-glow {
-    text-shadow: var(--text-shadow);
-  }
-
-  .terminal-border {
-    border: var(--terminal-border);
-    box-shadow: 
-      0 0 20px hsl(var(--terminal-green-glow) / 0.3),
-      inset 0 0 20px hsl(var(--terminal-green-glow) / 0.1);
-  }
-
-  /* Typing Animation */
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-
-  @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-  }
-
-  .typing-effect {
-    overflow: hidden;
-    border-right: 2px solid hsl(var(--terminal-green));
-    white-space: nowrap;
-    animation: typing 2s steps(40, end), blink 1s infinite;
-  }
-
-  /* CRT Flicker */
-  @keyframes flicker {
-    0%, 98% { opacity: 1; }
-    99%, 100% { opacity: 0.98; }
-  }
-
-  .crt-flicker {
-    animation: flicker 0.15s infinite linear;
-  }
-
-  /* Terminal Button Styles */
-  .terminal-button {
-    background: transparent;
-    border: 1px solid hsl(var(--terminal-green));
-    color: hsl(var(--terminal-green));
-    padding: 8px 16px;
-    font-family: 'JetBrains Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.2s ease;
-  }
-
-  .terminal-button:hover {
-    background: hsl(var(--terminal-green) / 0.1);
-    box-shadow: 0 0 10px hsl(var(--terminal-green-glow) / 0.5);
-    text-shadow: 0 0 5px hsl(var(--terminal-green-glow));
-  }
-
-  /* ASCII Art Styling */
-  .ascii-art {
-    font-family: 'JetBrains Mono', monospace;
-    line-height: 1;
-    white-space: pre;
-    color: hsl(var(--terminal-green));
-    text-shadow: 0 0 3px hsl(var(--terminal-green-glow));
   }
 }

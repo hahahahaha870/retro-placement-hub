@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import TerminalWindow from "./TerminalWindow";
+import WindowsDialog from "./TerminalWindow";
 
 const ResumeUpload = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -66,15 +66,21 @@ const ResumeUpload = () => {
   };
 
   return (
-    <TerminalWindow title="RESUME UPLOAD & ANALYSIS SYSTEM">
-      <div className="space-y-6">
-        <div className="text-terminal-amber terminal-glow">
-          {'>'} RESUME SCREENING ENGINE v2.1
-          <br />
-          {'>'} HALTING PROBLEM SIMULATION ACTIVE
+    <WindowsDialog title="Resume Upload & Analysis System" icon="📄">
+      <div className="space-y-4">
+        <div className="text-win95-black">
+          Resume Screening Engine v2.1 - Halting Problem Simulation Active
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
+          <Button
+            onClick={triggerFileSelect}
+            className="win95-button w-full py-2"
+            disabled={isScanning}
+          >
+            Select PDF Resume
+          </Button>
+
           <input
             ref={fileInputRef}
             type="file"
@@ -83,21 +89,13 @@ const ResumeUpload = () => {
             className="hidden"
           />
 
-          <Button
-            onClick={triggerFileSelect}
-            className="terminal-button w-full py-3"
-            disabled={isScanning}
-          >
-            [SELECT PDF RESUME]
-          </Button>
-
           {file && (
-            <div className="p-4 bg-terminal-bg border border-terminal-green">
-              <div className="text-terminal-green terminal-glow">
-                SELECTED FILE: {file.name}
+            <div className="win95-panel-inset p-3">
+              <div className="text-win95-black font-bold text-sm">
+                Selected File: {file.name}
               </div>
-              <div className="text-terminal-gray text-sm">
-                SIZE: {(file.size / 1024).toFixed(2)} KB | TYPE: {file.type}
+              <div className="text-win95-dark-gray text-xs">
+                Size: {(file.size / 1024).toFixed(2)} KB | Type: {file.type}
               </div>
             </div>
           )}
@@ -105,37 +103,37 @@ const ResumeUpload = () => {
           {file && !isScanning && !scanResult && (
             <Button
               onClick={handleUpload}
-              className="terminal-button w-full py-3"
+              className="win95-button w-full py-2"
             >
-              [INITIATE HALTING ANALYSIS]
+              Initiate Halting Analysis
             </Button>
           )}
 
           {isScanning && (
-            <div className="space-y-4">
-              <div className="text-terminal-amber terminal-glow animate-pulse">
-                SCANNING IN PROGRESS... PLEASE WAIT
+            <div className="space-y-3">
+              <div className="text-win95-black animate-pulse">
+                Scanning in progress... Please wait
               </div>
               <Progress value={uploadProgress} className="w-full" />
-              <div className="text-terminal-gray text-sm">
+              <div className="text-win95-dark-gray text-sm">
                 Progress: {uploadProgress.toFixed(0)}%
               </div>
             </div>
           )}
 
           {scanResult && (
-            <div className="space-y-4">
-              <div className="text-terminal-green terminal-glow">
-                ===== SCAN COMPLETE =====
+            <div className="space-y-3">
+              <div className="text-win95-black font-bold">
+                ===== Scan Complete =====
               </div>
-              <div className="p-4 bg-terminal-bg border border-terminal-amber">
-                <pre className="text-terminal-amber text-sm whitespace-pre-wrap">
+              <div className="win95-panel-inset p-3">
+                <pre className="text-win95-black text-xs whitespace-pre-wrap">
                   {scanResult}
                 </pre>
               </div>
-              <div className="flex gap-4">
-                <Button className="terminal-button flex-1">
-                  [ACCEPT & UPLOAD]
+              <div className="flex gap-2">
+                <Button className="win95-button flex-1">
+                  Accept & Upload
                 </Button>
                 <Button 
                   onClick={() => {
@@ -143,24 +141,20 @@ const ResumeUpload = () => {
                     setScanResult(null);
                     setUploadProgress(0);
                   }}
-                  className="terminal-button flex-1 text-terminal-red border-terminal-red hover:bg-terminal-red hover:text-terminal-bg"
+                  className="win95-button flex-1"
                 >
-                  [REJECT & RETRY]
+                  Reject & Retry
                 </Button>
               </div>
             </div>
           )}
         </div>
 
-        <div className="text-terminal-gray text-sm">
-          {'>'} The Halting Problem Scanner analyzes resume completeness
-          <br />
-          {'>'} Infinite loops in experience or incomplete sections are flagged
-          <br />
-          {'>'} Only PDFs accepted for security and parsing reliability
+        <div className="win95-statusbar text-xs">
+          The Halting Problem Scanner analyzes resume completeness. Infinite loops in experience or incomplete sections are flagged. Only PDFs accepted for security and parsing reliability.
         </div>
       </div>
-    </TerminalWindow>
+    </WindowsDialog>
   );
 };
 

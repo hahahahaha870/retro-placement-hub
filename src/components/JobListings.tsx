@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import TerminalWindow from "./TerminalWindow";
+import WindowsDialog from "./TerminalWindow";
 
 interface Job {
   id: string;
@@ -72,81 +72,77 @@ const JobListings = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "active": return "text-terminal-green";
-      case "closing": return "text-terminal-amber";
-      case "closed": return "text-terminal-red";
-      default: return "text-terminal-gray";
+      case "active": return "text-win95-blue";
+      case "closing": return "text-win95-navy";  
+      case "closed": return "text-win95-red";
+      default: return "text-win95-dark-gray";
     }
   };
 
   return (
-    <TerminalWindow title="JOB OPPORTUNITIES DATABASE">
-      <div className="space-y-6">
-        <div className="text-terminal-amber terminal-glow">
-          {'>'} ACTIVE JOB LISTINGS: {jobs.filter(j => j.status === "active").length}
-          <br />
-          {'>'} TOTAL OPPORTUNITIES: {jobs.length}
-          <br />
-          {'>'} LAST UPDATED: {new Date().toLocaleString()}
+    <WindowsDialog title="Job Opportunities Database" icon="💼">
+      <div className="space-y-4">
+        <div className="text-win95-black">
+          Active Job Listings: {jobs.filter(j => j.status === "active").length} | Total Opportunities: {jobs.length} | Last Updated: {new Date().toLocaleString()}
         </div>
 
-        <div className="space-y-4">
+        <div className="win95-listview p-2 max-h-96 overflow-y-auto">
           {jobs.map((job) => (
             <div
               key={job.id}
-              className={`p-4 border-2 transition-all duration-300 ${
+              className={`win95-panel m-2 p-3 transition-all duration-300 ${
                 selectedJob === job.id
-                  ? "border-terminal-amber bg-terminal-surface"
-                  : "border-terminal-green bg-terminal-bg hover:border-terminal-amber"
+                  ? "bg-win95-light-gray"
+                  : ""
               }`}
             >
-              <div className="flex justify-between items-start mb-3">
+              <div className="flex justify-between items-start mb-2">
                 <div>
-                  <h3 className="text-terminal-green terminal-glow text-lg font-bold">
+                  <h3 className="text-win95-black font-bold text-sm">
                     {job.title}
                   </h3>
-                  <p className="text-terminal-cyan">{job.company}</p>
+                  <p className="text-win95-blue text-xs">{job.company}</p>
                 </div>
                 <div className="text-right">
-                  <div className={`${getStatusColor(job.status)} terminal-glow uppercase text-sm`}>
-                    {job.status}
+                  <div className={`${getStatusColor(job.status)} text-xs font-bold`}>
+                    {job.status.toUpperCase()}
                   </div>
-                  <div className="text-terminal-gray text-sm">
+                  <div className="text-win95-dark-gray text-xs">
                     ID: {job.id}
                   </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-sm">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-2 text-xs">
                 <div>
-                  <span className="text-terminal-gray">LOCATION:</span>
+                  <span className="text-win95-dark-gray">Location:</span>
                   <br />
-                  <span className="text-terminal-white">{job.location}</span>
+                  <span className="text-win95-black">{job.location}</span>
                 </div>
                 <div>
-                  <span className="text-terminal-gray">SALARY:</span>
+                  <span className="text-win95-dark-gray">Salary:</span>
                   <br />
-                  <span className="text-terminal-white">{job.salary}</span>
+                  <span className="text-win95-black">{job.salary}</span>
                 </div>
                 <div>
-                  <span className="text-terminal-gray">POSTED:</span>
+                  <span className="text-win95-dark-gray">Posted:</span>
                   <br />
-                  <span className="text-terminal-white">{job.posted}</span>
+                  <span className="text-win95-black">{job.posted}</span>
                 </div>
                 <div>
-                  <span className="text-terminal-gray">APPLICATIONS:</span>
+                  <span className="text-win95-dark-gray">Applications:</span>
                   <br />
-                  <span className="text-terminal-white">{job.applications}</span>
+                  <span className="text-win95-black">{job.applications}</span>
                 </div>
               </div>
 
-              <div className="mb-4">
-                <span className="text-terminal-gray text-sm">REQUIRED SKILLS:</span>
-                <div className="flex gap-2 mt-2 flex-wrap">
+              <div className="mb-2">
+                <span className="text-win95-dark-gray text-xs">Required Skills:</span>
+                <div className="flex gap-1 mt-1 flex-wrap">
                   {job.skills.map((skill) => (
                     <Badge
                       key={skill}
-                      className="bg-terminal-green text-terminal-bg hover:bg-terminal-amber"
+                      className="bg-win95-blue text-win95-white text-xs px-2 py-1"
                     >
                       {skill}
                     </Badge>
@@ -154,29 +150,29 @@ const JobListings = () => {
                 </div>
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex gap-2">
                 <Button
                   onClick={() => setSelectedJob(selectedJob === job.id ? null : job.id)}
-                  className="terminal-button"
+                  className="win95-button text-xs"
                 >
-                  {selectedJob === job.id ? "[COLLAPSE]" : "[VIEW DETAILS]"}
+                  {selectedJob === job.id ? "Collapse" : "View Details"}
                 </Button>
                 {job.status === "active" && (
                   <Button
                     onClick={() => handleApply(job.id)}
-                    className="terminal-button text-terminal-amber border-terminal-amber hover:bg-terminal-amber hover:text-terminal-bg"
+                    className="win95-button text-xs"
                   >
-                    [APPLY NOW]
+                    Apply Now
                   </Button>
                 )}
               </div>
 
               {selectedJob === job.id && (
-                <div className="mt-4 p-4 bg-terminal-bg border border-terminal-amber">
-                  <div className="text-terminal-amber terminal-glow mb-2">
-                    JOB DESCRIPTION:
+                <div className="mt-2 win95-panel-inset p-2">
+                  <div className="text-win95-black font-bold text-xs mb-1">
+                    Job Description:
                   </div>
-                  <div className="text-terminal-white text-sm space-y-2">
+                  <div className="text-win95-black text-xs space-y-1">
                     <p>We are seeking a talented {job.title.toLowerCase()} to join our growing team.</p>
                     <p>Requirements: {job.skills.join(", ")} with 2+ years experience.</p>
                     <p>Benefits: Health insurance, flexible hours, remote work options.</p>
@@ -188,15 +184,11 @@ const JobListings = () => {
           ))}
         </div>
 
-        <div className="text-terminal-gray text-sm">
-          {'>'} Use [APPLY NOW] to submit your application
-          <br />
-          {'>'} Interview notifications will be sent via email
-          <br />
-          {'>'} Company portals: company.placementcell.com (DNS-mapped subdomains)
+        <div className="win95-statusbar text-xs">
+          Use "Apply Now" to submit your application. Interview notifications will be sent via email. Company portals: company.placementcell.com (DNS-mapped subdomains)
         </div>
       </div>
-    </TerminalWindow>
+    </WindowsDialog>
   );
 };
 

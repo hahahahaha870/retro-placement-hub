@@ -1,30 +1,30 @@
 import { ReactNode } from "react";
 
-interface TerminalWindowProps {
+interface WindowsDialogProps {
   title: string;
   children: ReactNode;
   className?: string;
+  icon?: string;
 }
 
-const TerminalWindow = ({ title, children, className = "" }: TerminalWindowProps) => {
+const WindowsDialog = ({ title, children, className = "", icon = "📄" }: WindowsDialogProps) => {
   return (
-    <div className={`terminal-border bg-terminal-surface p-6 ${className} crt-flicker`}>
-      <div className="flex items-center justify-between mb-4 pb-2 border-b border-terminal-green">
+    <div className={`win95-window ${className}`}>
+      <div className="win95-titlebar">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-terminal-red"></div>
-          <div className="w-3 h-3 rounded-full bg-terminal-amber"></div>
-          <div className="w-3 h-3 rounded-full bg-terminal-green"></div>
+          <span>{icon}</span>
+          <span>{title}</span>
         </div>
-        <h2 className="text-terminal-green terminal-glow uppercase tracking-wider">
-          {title}
-        </h2>
-        <div className="text-terminal-gray text-sm">
-          [{new Date().toLocaleTimeString()}]
+        <div className="flex gap-1">
+          <button className="w-4 h-4 bg-win95-gray border border-win95-dark-gray text-xs flex items-center justify-center">_</button>
+          <button className="w-4 h-4 bg-win95-gray border border-win95-dark-gray text-xs flex items-center justify-center">×</button>
         </div>
       </div>
-      {children}
+      <div className="p-4 bg-win95-light-gray">
+        {children}
+      </div>
     </div>
   );
 };
 
-export default TerminalWindow;
+export default WindowsDialog;
